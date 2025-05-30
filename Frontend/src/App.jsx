@@ -16,6 +16,7 @@ const App = () => {
   <Route path='/login' element = {authUser ? <Navigate to = '/' /> : <Login />}/>
  </Routes>
  <Toaster />
+ {/* this is my commit */}
    </div>
   
   )
