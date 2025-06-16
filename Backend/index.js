@@ -20,7 +20,11 @@ const PORT = process.env.PORT || 5000;
 // ✅ Middleware
 app.use(express.json());
 app.use(cookieParser());
-
+const corsOptions ={
+  origin:"https://chat-application-ogxl.onrender.com",
+  credentials:true
+}
+app.use(cors(corsOptions))
 // ✅ Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/message', messageRoutes);

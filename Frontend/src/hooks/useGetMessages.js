@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import useConversation from '../zustand/useConversation'
 import toast from 'react-hot-toast'
 
-const API_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+// const API_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 
 const useGetMessages = () => {
@@ -12,10 +12,7 @@ useEffect(() => {
     const getMessages = async () => {
         setLoading(true);
         try {
-           const res = await fetch(`${API_URL}/api/message/${selectedConversation._id}`, {
-          method: 'GET',
-          credentials: 'include', // ✅ Important for auth
-        });
+           const res = await fetch(`/api/message/${selectedConversation._id}`);
             const data = await res.json();
             if (data.error) {
                 throw new Error(data.error);
