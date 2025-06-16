@@ -41,10 +41,11 @@ export const signup = async (req, res) => {
         // Set the token as a cookie
         res.cookie('jwt', token, {
             httpOnly: true,
-            maxAge: 24 * 60 * 60 * 1000,
-            sameSite: 'strict',
-            secure: process.env.NODE_ENV !== "development"
-        })
+            maxAge: 24 * 60 * 60 * 1000, // 1 day
+            sameSite: 'None',    // important for cross-origin cookies
+            secure: process.env.NODE_ENV !== 'development',  // true in prod (HTTPS)
+        });
+
 
         res.status(201).json({
             message: "user registered successfully",
@@ -74,20 +75,21 @@ export const login = async (req, res) => {
         if (!isPassword) return res.status(400).json({ message: "Invalid credentials" })
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" })
-
-        res.cookie("jwt", token, {
+        
+        res.cookie('jwt', token, {
             httpOnly: true,
-            maxAge: 24 * 60 * 60 * 1000,
-            sameSite: 'Strict',
-            secure: process.env.NODE_ENV !== "development"
-        })
+            maxAge: 24 * 60 * 60 * 1000, // 1 day
+            sameSite: 'None',    // important for cross-origin cookies
+            secure: process.env.NODE_ENV !== 'development',  // true in prod (HTTPS)
+        });
+
 
         res.status(200).json({
             _id: user._id,
             fullName: user.fullName,
             username: user.username,
             profilePic: user.profilePic,
-           
+
         })
     } catch (error) {
         res.status(500).json({ message: "server error" })
@@ -102,30 +104,3 @@ export const logout = (req, res) => {
     }
 
 }
-// export const updateProfile = async (req, res) => {
-//     try {
-//         const { profilePic } = req.body
-//         const userId = req.user._id
-
-//         if (!profilePic) {
-//             return res.status(400).json({ message: "profile pic is neccessary" })
-//         }
-//         //upload the img to cloudinary
-//         const profileResult = await cloudinary.uploader.upload(profilePic)
-//         //get the url of the uploaded img
-//         const updateUserProfile = await User.findByIdAndUpdate(userId, { profilePic: profileResult.secure_url }, { new: true })
-//     } catch (error) {
-//         console.error("Error in protectRoute middleware:", error);
-//         res.status(500).json({ message: "Internal Server Error" });
-//     }
-// }
-
-// export const checkAuth = (req, res) => {
-//     try {
-//         res.status(200).json(req.user)
-//     } catch (error) {
-//         console.log("Error in check Auth controller")
-//         res.status(500).json({ message: "internal server error" })
-
-//     }
-// }

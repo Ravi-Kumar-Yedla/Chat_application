@@ -4,9 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon backend/index.js",
+    "dev":  "nodemon Backend/index.js",
     "build": "npm install && npm install --prefix Frontend && npm run build --prefix Frontend",
-    "start": "nodemon backend/index.js"
+    "start" :  "nodemon Backend/index.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,7 @@
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.5.1",
     "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "daisyui": "^5.0.40",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",

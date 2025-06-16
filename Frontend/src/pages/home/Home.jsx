@@ -1,5 +1,7 @@
 import React from 'react'
-import Sidebar from '../../components/sidebar/sidebar'
+// import Sidebar from '../../components/sidebar/sidebar'
+import Sidebar from '../../components/sidebar/Sidebar'
+
 import MessageContainer from '../../components/sidebar/messages/MessageContainer'
 const Home = () => {
   return (
@@ -11,4 +13,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Home;
