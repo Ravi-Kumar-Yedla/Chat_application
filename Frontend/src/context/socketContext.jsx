@@ -18,7 +18,7 @@ export const SocketContextProvider = ({ children }) => {
 
     useEffect(()=>{
    if(authUser ){
-    const socket = io(import.meta.env.VITE_BACKEND_URL, {
+    const socket = io("https://chat-application-ogxl.onrender.com", {
         query :{
             userId :authUser._id
         },

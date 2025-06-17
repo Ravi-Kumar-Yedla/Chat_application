@@ -13,7 +13,7 @@ useEffect(() => {
         setLoading(true);
         try {
             const res = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/api/message/${selectedConversation._id}`,
+          `/api/message/${selectedConversation._id}`,
           {
             credentials: 'include', // include cookies if using auth
           }

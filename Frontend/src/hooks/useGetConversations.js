@@ -9,7 +9,7 @@ const useGetConversations = () => {
 		const getConversations = async () => {
 			setLoading(true);
 			try {
-			const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users`, {
+			const res = await fetch("/api/users", {
 					credentials: 'include', // include cookies if needed
 				});
 				const data = await res.json();
