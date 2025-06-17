@@ -36,7 +36,6 @@
 // };
 
 // export default useSendMessage;
-
 import useConversation from '../zustand/useConversation';
 import toast from 'react-hot-toast';
 
@@ -46,14 +45,13 @@ const useSendMessage = () => {
   const sendMessage = async (message) => {
     const tempMessage = {
       _id: Date.now(), // temporary ID
-      senderId: "you", // optional
+      senderId: "you",
       receiverId: selectedConversation._id,
       message,
       createdAt: new Date().toISOString(),
-      // ...any other fields you normally receive
     };
 
-    // ✅ Show message immediately
+    // Show temp message immediately
     setMessages((prev) => {
       const safePrev = Array.isArray(prev) ? prev : [];
       return [...safePrev, tempMessage];
@@ -73,11 +71,16 @@ const useSendMessage = () => {
       const data = await res.json();
       if (data.error) throw new Error(data.error);
 
-      // Optional: Replace tempMessage with real message from server using _id
-      // You can do this by updating setMessages again
+      // 🔁 Replace temp with real message
+      setMessages((prev) => {
+        const safePrev = Array.isArray(prev) ? prev : [];
+        const updated = safePrev.slice(0, -1);
+        return [...updated, data.newMessage];
+      });
+
     } catch (error) {
       toast.error(error.message);
-      // Optional: remove the tempMessage from the UI if failed
+      // Optional: Remove tempMessage on failure
     }
   };
 
