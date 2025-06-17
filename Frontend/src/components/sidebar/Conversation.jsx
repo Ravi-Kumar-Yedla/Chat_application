@@ -9,6 +9,8 @@ const Conversation = ({ conversation, lastIdx, emoji }) => {
   const isSelected = selectedConversation?._id === conversation._id;
   const { onlineUsers } = useSocketContext()
   const isOnline = onlineUsers.includes(conversation._id)
+
+   const fallbackProfilePic = `https://api.dicebear.com/7.x/initials/svg?seed=${conversation.username || 'user'}`;
   return (
     <>
       <div
@@ -19,7 +21,7 @@ const Conversation = ({ conversation, lastIdx, emoji }) => {
       >
         <div className='avatar relative'>
           <div className='w-12 rounded-full'>
-            <img src={conversation.profilePic} alt='user avatar' />
+            <img src={conversation.profilePic || fallbackProfilePic} alt='user avatar' />
           </div>
 
 
