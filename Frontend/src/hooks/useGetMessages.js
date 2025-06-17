@@ -12,7 +12,12 @@ useEffect(() => {
     const getMessages = async () => {
         setLoading(true);
         try {
-           const res = await fetch(`/api/message/${selectedConversation._id}`);
+            const res = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/message/${selectedConversation._id}`,
+          {
+            credentials: 'include', // include cookies if using auth
+          }
+        );
             const data = await res.json();
             if (data.error) {
                 throw new Error(data.error);

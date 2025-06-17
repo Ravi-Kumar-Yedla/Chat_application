@@ -9,17 +9,19 @@ const useSignup = () => {
 	const { setAuthUser } = useAuthContext();
 
 	const signup = async ({ fullName, username, password, confirmPassword, gender }) => {
-    if (!handleInputErrors({ fullName, username, password, confirmPassword, gender })) return;
+		if (!handleInputErrors({ fullName, username, password, confirmPassword, gender })) return;
 
 		setLoading(true);
 		try {
-		    const res = await fetch(`/api/auth/signup`, {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ fullName, username, password, confirmPassword, gender }),
-                  credentials: "include" 
-
-			});
+			const res = await fetch(
+				`${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`,
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ fullName, username, password, confirmPassword, gender }),
+					credentials: "include"
+				}
+			);
 
 			const data = await res.json();
 			// console.log(data)
@@ -28,7 +30,7 @@ const useSignup = () => {
 			}
 			localStorage.setItem("chat-user", JSON.stringify(data));
 			setAuthUser(data);
-            toast.success("Signup successful!"); 
+			toast.success("Signup successful!");
 		} catch (error) {
 			toast.error(error.message);
 		} finally {
@@ -55,6 +57,6 @@ function handleInputErrors({ fullName, username, password, confirmPassword, gend
 		toast.error("Password must be at least 6 characters");
 		return false;
 	}
-   
+
 	return true;
 }

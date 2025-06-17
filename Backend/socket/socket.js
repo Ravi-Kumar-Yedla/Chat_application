@@ -6,10 +6,15 @@ const app = express();
 
 const server = createServer(app);
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://chat-application-ogxl.onrender.com"
+];
+
 // 👇 CORS should allow Vercel frontend (production)
 const io = new Server(server, {
 	cors: {
-		origin: ["http://localhost:3000"],
+		origin: allowedOrigins,
 		methods: ["GET", "POST"],
 	},
 });
